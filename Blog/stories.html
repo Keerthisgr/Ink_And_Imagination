@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ink & Imagination | Stories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            /* Softer blue */
+            --secondary: #6b9080;
+            /* Muted green */
+            --accent: #ff7e5f;
+            /* Coral accent */
+            --dark: #2d3436;
+            /* Dark gray */
+            --light: #f9f9f9;
+            /* Off-white */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(45, 52, 54, 0.7), rgba(45, 52, 54, 0.7)),
+                url('https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent);
+        }
+
+        /* Stories Section */
+        .stories {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .story-card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .story-content {
+            padding: 2rem;
+        }
+
+        .story-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .story-meta {
+            display: flex;
+            margin-bottom: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .story-meta span {
+            margin-right: 1rem;
+        }
+
+        .story-excerpt {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .read-more {
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Story Modal */
+        .story-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background-color: white;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        .modal-story-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .modal-story-meta {
+            display: flex;
+            margin-bottom: 1.5rem;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .modal-story-meta span {
+            margin-right: 1.5rem;
+        }
+
+        .modal-story-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .modal-story-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background-color: var(--accent);
+            bottom: -8px;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            .story-image {
+                height: 200px;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .modal-story-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-pen-fancy"></i>
+                    <span>Ink & Imagination</span>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#stories">Stories</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Ink the Thoughts, Imagine the World</h1>
+                <p>Where my thoughts meet the page, and writers find their path.</p>
+                <a href="#stories" class="btn">Read Stories</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stories Section -->
+    <section class="stories" id="stories">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Stories</h2>
+            </div>
+
+            <!-- Story 1 -->
+            <div class="story-card fade-in">
+                <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                    alt="Midnight Library" class="story-image">
+                <div class="story-content">
+                    <h3 class="story-title">The Name That Inspires!!</h3>
+                    <div class="story-meta">
+                        <span><i class="fas fa-user"></i> Keerthi S R</span>
+                        <span><i class="fas fa-calendar"></i> June 25, 2025</span>
+                        <span><i class="fas fa-tag"></i> Inspirational</span>
+                    </div>
+                    <p class="story-excerpt">
+                        During my college days, I attended many training sessions: some I remember well, others just
+                        blur into the background. But there was this one session, and honestly, I don't even remember
+                        the trainer's name or the subject.</p>
+                    <a class="read-more" onclick="openStoryModal('The Name That Inspires!!', 'Keerthi S R', 'June 25, 2025', 'Inspirational')">Read
+                        full story <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Modal -->
+    <div id="storyModal" class="story-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeStoryModal()">&times;</span>
+            <h3 id="modalStoryTitle" class="modal-story-title"></h3>
+            <div id="modalStoryMeta" class="modal-story-meta"></div>
+            <div id="modalStoryContent" class="modal-story-content">
+                <!-- Story content will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Ink & Imagination</h3>
+                    <p>A space where thoughts become stories and imagination knows no bounds.</p>
+                   <div class="social-links">
+    <a href="https://instagram.com/ink_and_imagination_25" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i>
+    </a>
+</div>
+
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#stories">Stories</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> inkandimagination97@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Sagara Shivamogga</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2025 Ink & Imagination. Preserving the art of storytelling.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+
+        mobileMenuBtn.addEventListener('click', function () {
+            mainNav.classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        function checkScroll() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = 1;
+                }
+            });
+        }
+
+        // Initial check
+        checkScroll();
+
+        // Check on scroll
+        window.addEventListener('scroll', checkScroll);
+
+        // Story Modal Functions
+        function openStoryModal(title, author, date, genre) {
+            const modal = document.getElementById('storyModal');
+            const modalTitle = document.getElementById('modalStoryTitle');
+            const modalMeta = document.getElementById('modalStoryMeta');
+            const modalContent = document.getElementById('modalStoryContent');
+
+            // Set the modal content
+            modalTitle.textContent = title;
+
+            // Create meta information
+            modalMeta.innerHTML = `
+                <span><i class="fas fa-user"></i> ${author}</span>
+                <span><i class="fas fa-calendar"></i> ${date}</span>
+                <span><i class="fas fa-tag"></i> ${genre}</span>
+            `;
+
+            // Create story content
+            let storyContent = '';
+
+            if (title === 'The Name That Inspires!!') {
+                storyContent = `
+                    <p>During my college days, I attended many training sessions: some I remember well, others just blur into the background. But there was this one session, and honestly, I don't even remember the trainer's name or the subject. It was just another regular day... until he said something that stayed with me forever:</p>
+                    <p>"If you don't love yourself first, no one else can truly show you your worth."</p>
+                    <p>Those words hit me deeply.</p>
+                    <p>That one line started a journey I didn't expect. He also spoke about creating a tagline: a small sentence that describes you, something that reflects your values and boosts your self-respect. A personal identity, more powerful than just a name.</p>
+                    <p>I remember going back to my hostel that evening and thinking, "What would my tagline be?"
+I didn't find the answer immediately. It took me almost a month. I kept asking myself, "What do I want to tell the world about me?"</p> 
+<p>One evening, while reading the meaning of my name Keerthi, I discovered it means "fame" or "respect" in Kannada, a name that holds power, legacy, and pride.</p>
+<p>And that's when it clicked.</p> 
+<p>I created my tagline:
+"Keerthi – The Name That Inspires."
+</p>
+<p>It wasn't just a line. It became a reminder for me every day that I carry a name full of meaning, that I should be proud of who I am, and that loving myself isn't selfish it's necessary.</p> 
+<p>From that day, whenever I feel low, I repeat my tagline. It lifts me up. It reminds me why I must respect myself first. It inspires me, and now, I hope it inspires you.</p>
+<p>So, I encourage you take some time, look into your name, your story, your strengths, and come up with a tagline that speaks to your heart.
+Because when you find it, you don't just discover a line you discover yourself.</p>             `;
+            }
+
+            modalContent.innerHTML = storyContent;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        }
+
+        function closeStoryModal() {
+            const modal = document.getElementById('storyModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+
+        // Close modal when clicking outside the content
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById('storyModal');
+            if (event.target === modal) {
+                closeStoryModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
