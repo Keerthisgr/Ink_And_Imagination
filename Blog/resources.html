@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ink & Imagination | Writing Resources</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a6fa5;  /* Softer blue */
+            --secondary: #6b9080;  /* Muted green */
+            --accent: #ff7e5f;   /* Coral accent */
+            --dark: #2d3436;     /* Dark gray */
+            --light: #f9f9f9;    /* Off-white */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: var(--dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(45, 52, 54, 0.7), rgba(45, 52, 54, 0.7)), 
+                        url('https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent);
+        }
+
+        /* Resources Sections */
+        .resources {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .resource-card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            padding: 2rem;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .resource-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .resource-title i {
+            margin-right: 15px;
+            color: var(--accent);
+        }
+
+        .resource-content {
+            color: var(--dark);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .resource-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .resource-content li {
+            margin-bottom: 0.8rem;
+        }
+
+        .resource-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background-color: var(--accent);
+            bottom: -8px;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: none;
+                width: 100%;
+                box-shadow: none;
+                background-color: transparent;
+            }
+
+            .dropdown-content a {
+                color: white;
+                padding: 0.5rem 0;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            .resource-image {
+                height: 200px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-pen-fancy"></i>
+                    <span>Ink & Imagination</span>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="stories.html">Stories</a></li>
+                        <li class="dropdown">
+                            <a href="#resources">Resources <i class="fas fa-caret-down"></i></a>
+                            <div class="dropdown-content">
+                                <a href="#exercises">Writing Exercises</a>
+                                <a href="#structures">Narrative Structures</a>
+                                <a href="#character">Character Development</a>
+                                <a href="#editing">Editing Guide</a>
+                            </div>
+                        </li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Master the Craft of Writing</h1>
+                <p>Essential resources and exercises to elevate your writing skills.</p>
+                <a href="#exercises" class="btn">Explore Resources</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Sections -->
+    <section class="resources" id="resources">
+        <div class="container">
+            <!-- Writing Exercises Section -->
+            <div class="resource-card fade-in" id="exercises">
+                <h2 class="resource-title"><i class="fas fa-pencil-alt"></i> Writing Exercises</h2>
+                <div class="resource-content">
+                    <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Writing Exercises" class="resource-image">
+                    <p>Regular writing exercises can help you break through creative blocks, develop new skills, and find your unique voice. Here are some powerful exercises to try:</p>
+                    
+                    <h3>1. Free Writing</h3>
+                    <p>Set a timer for 10-15 minutes and write continuously without stopping. Don't worry about grammar, spelling, or making sense. Just let the words flow.</p>
+                    
+                    <h3>2. Sensory Description</h3>
+                    <p>Choose a location and describe it using all five senses. Focus on specific details rather than general impressions.</p>
+                    
+                    <h3>3. Character Interviews</h3>
+                    <p>Create a list of questions to ask your characters (favorite food, childhood memory, secret fear) and answer in their voice.</p>
+                    
+                    <h3>4. Dialogue Practice</h3>
+                    <p>Write a conversation between two characters where:</p>
+                    <ul>
+                        <li>They're arguing but can't say what they're really arguing about</li>
+                        <li>One is hiding a secret from the other</li>
+                        <li>They're meeting for the first time</li>
+                    </ul>
+                    
+                    <h3>5. First Line/Last Line</h3>
+                    <p>Write a compelling first sentence, then skip down and write a powerful last sentence. Then fill in the story that connects them.</p>
+                </div>
+            </div>
+            
+            <!-- Narrative Structures Section -->
+            <div class="resource-card fade-in" id="structures">
+                <h2 class="resource-title"><i class="fas fa-project-diagram"></i> Narrative Structures</h2>
+                <div class="resource-content">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Narrative Structures" class="resource-image">
+                    <p>Understanding narrative structures can help you craft compelling stories. Here are some classic frameworks:</p>
+                    
+                    <h3>The Three-Act Structure</h3>
+                    <p>The most fundamental structure dividing a story into Setup, Confrontation, and Resolution.</p>
+                    <ul>
+                        <li><strong>Act 1 (Setup):</strong> Introduce characters, setting, and the inciting incident</li>
+                        <li><strong>Act 2 (Confrontation):</strong> Develop conflicts, raise stakes, approach climax</li>
+                        <li><strong>Act 3 (Resolution):</strong> Climax, falling action, and denouement</li>
+                    </ul>
+                    
+                    <h3>The Hero's Journey</h3>
+                    <p>Joseph Campbell's monomyth pattern with three main stages and 17 possible steps:</p>
+                    <ul>
+                        <li><strong>Departure:</strong> Ordinary world, call to adventure, crossing the threshold</li>
+                        <li><strong>Initiation:</strong> Tests, allies and enemies, approach, ordeal, reward</li>
+                        <li><strong>Return:</strong> The road back, resurrection, return with elixir</li>
+                    </ul>
+                    
+                    <h3>In Media Res</h3>
+                    <p>Starting in the middle of the action, then filling in backstory through flashbacks or exposition.</p>
+                    
+                    <h3>Nonlinear Narrative</h3>
+                    <p>Events are portrayed out of chronological order (e.g., flashbacks, flash-forwards, parallel timelines).</p>
+                    
+                    <h3>The Fichtean Curve</h3>
+                    <p>A structure that maintains tension through a series of rising crises leading to the climax.</p>
+                </div>
+            </div>
+            
+            <!-- Character Development Section -->
+            <div class="resource-card fade-in" id="character">
+                <h2 class="resource-title"><i class="fas fa-users"></i> Character Development</h2>
+                <div class="resource-content">
+                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Character Development" class="resource-image">
+                    <p>Creating compelling, multidimensional characters is essential for engaging fiction. Here are key techniques:</p>
+                    
+                    <h3>Character Profile Elements</h3>
+                    <ul>
+                        <li><strong>Physical Appearance:</strong> Not just looks, but how they carry themselves</li>
+                        <li><strong>Background:</strong> Family, education, formative experiences</li>
+                        <li><strong>Personality:</strong> Traits, flaws, quirks, habits</li>
+                        <li><strong>Motivations:</strong> What drives them? What do they want?</li>
+                        <li><strong>Conflicts:</strong> Internal and external struggles</li>
+                        <li><strong>Arc:</strong> How will they change through the story?</li>
+                    </ul>
+                    
+                    <h3>Character Relationships</h3>
+                    <p>Map how characters relate to each other:</p>
+                    <ul>
+                        <li>Family ties and histories</li>
+                        <li>Friendships and alliances</li>
+                        <li>Romantic connections</li>
+                        <li>Professional relationships</li>
+                        <li>Power dynamics</li>
+                    </ul>
+                    
+                    <h3>Show Don't Tell</h3>
+                    <p>Reveal character through:</p>
+                    <ul>
+                        <li>Actions and choices under pressure</li>
+                        <li>Dialogue patterns and speech mannerisms</li>
+                        <li>Reactions to events and other characters</li>
+                        <li>Personal habits and environments</li>
+                    </ul>
+                    
+                    <h3>Character Arcs</h3>
+                    <p>Plan how your character will transform:</p>
+                    <ul>
+                        <li><strong>Positive Change:</strong> The character overcomes flaws</li>
+                        <li><strong>Negative Change:</strong> The character succumbs to flaws</li>
+                        <li><strong>Flat Arc:</strong> The character changes the world around them</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Editing Guide Section -->
+            <div class="resource-card fade-in" id="editing">
+                <h2 class="resource-title"><i class="fas fa-edit"></i> Editing Guide</h2>
+                <div class="resource-content">
+                    <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Editing Guide" class="resource-image">
+                    <p>A systematic approach to revising your work can transform a good draft into a great finished piece.</p>
+                    
+                    <h3>The Editing Process</h3>
+                    <ol>
+                        <li><strong>Take a Break:</strong> Distance yourself before editing</li>
+                        <li><strong>Big Picture Review:</strong> Structure, pacing, character arcs</li>
+                        <li><strong>Scene-Level Edits:</strong> Each scene's purpose and effectiveness</li>
+                        <li><strong>Line Edits:</strong> Sentence structure, word choice, clarity</li>
+                        <li><strong>Proofreading:</strong> Grammar, spelling, punctuation</li>
+                    </ol>
+                    
+                    <h3>Common Issues to Watch For</h3>
+                    <ul>
+                        <li><strong>Show vs. Tell:</strong> Are you explaining when you could demonstrate?</li>
+                        <li><strong>Pacing:</strong> Does the story drag in places? Rush through others?</li>
+                        <li><strong>Consistency:</strong> Character details, timeline, world rules</li>
+                        <li><strong>Point of View:</strong> Head-hopping or unclear POV</li>
+                        <li><strong>Dialogue Tags:</strong> Overuse of adverbs or unusual tags</li>
+                        <li><strong>Passive Voice:</strong> Overuse weakens prose</li>
+                    </ul>
+                    
+                    <h3>Editing Techniques</h3>
+                    <ul>
+                        <li><strong>Read Aloud:</strong> Catch awkward phrasing and rhythm issues</li>
+                        <li><strong>Highlighting:</strong> Color-code different elements to check balance</li>
+                        <li><strong>Reverse Outline:</strong> Create an outline from your draft to check structure</li>
+                        <li><strong>Beta Readers:</strong> Get fresh perspectives from trusted readers</li>
+                    </ul>
+                    
+                    <h3>Style Considerations</h3>
+                    <p>Develop your unique voice while maintaining clarity:</p>
+                    <ul>
+                        <li>Sentence length variation</li>
+                        <li>Paragraph structure</li>
+                        <li>Word choice precision</li>
+                        <li>Sensory detail balance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Ink & Imagination</h3>
+                    <p>A space where thoughts become stories and imagination knows no bounds.</p>
+                    <div class="social-links">
+    <a href="https://instagram.com/ink_and_imagination_25" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i>
+    </a>
+</div>
+
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="stories.html">Stories</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> inkandimagination97@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Sagara Shivamogga</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2025 Ink & Imagination. Preserving the art of storytelling.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+        });
+
+        // Mobile dropdown toggle
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    this.classList.toggle('active');
+                }
+            });
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        function checkScroll() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = 1;
+                }
+            });
+        }
+
+        // Initial check
+        checkScroll();
+
+        // Check on scroll
+        window.addEventListener('scroll', checkScroll);
+    </script>
+</body>
+</html>
