@@ -21,8 +21,6 @@ The goal is simple: **write to heal, inspire, and connect hearts**.
 - **HTML5** – Page structure  
 - **CSS3** – Styling and design  
 - **JavaScript** – Interactivity  
-- **GitHub Pages** – Hosting  
+- **Vercel** – Hosting  
 
----
 
-## 📂 Project Structure  
